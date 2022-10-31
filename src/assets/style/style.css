@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+/* =========================
+		Fonts
+ ========================= */
+@font-face {
+    font-family: 'NotoSansKR-R';
+    font-weight:400;
+    src: url("src/assets/fonts/NotoSansKR-Regular.otf");
+}
+@font-face {
+    font-family: 'NotoSansKR-M';
+    font-weight:500;
+    src: url("src/assets/fonts/NotoSansKR-Medium.otf");
+}
+@font-face {
+    font-family: 'NotoSansKR-B';
+    font-weight:600;
+    src: url("src/assets/fonts/NotoSansKR-Bold.otf");
+}
+/* =========================
+		Commons
+ ========================= */
+body, pre{font-family:'NotoSansKR-R',sans-serif;font-size:16px;color:#000;}
