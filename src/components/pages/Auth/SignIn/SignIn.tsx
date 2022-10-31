@@ -29,7 +29,7 @@ const SignIn = () => {
                 <input type="password"/>
                 <br />
                 <button>
-                    Login
+                    로그인
                 </button>
             </form>
         </div>
