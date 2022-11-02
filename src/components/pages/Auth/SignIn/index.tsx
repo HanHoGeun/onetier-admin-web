@@ -1,6 +1,7 @@
 import React from 'react';
-import SignInView from './SignIn';
+import SignInComponent from './SignIn';
 
-export default function SignIn () {
-    return <SignInView />
+const SignInContainer = () => {
+    return <SignInComponent />
 }
+export default SignInContainer;
