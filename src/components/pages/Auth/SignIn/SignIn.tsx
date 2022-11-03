@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import './styles'
+import './SignIn.styles'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-interface signInForm {
+interface formValue {
     email: String;
     password: String;
 }
@@ -18,10 +18,11 @@ const SignIn = () => {
             .required('비밀번호는 필수 입력사항입니다.')
             .max(40)
     })
-    const { register, handleSubmit, formState: { errors } } = useForm<signInForm>({
-        resolver: yupResolver(validationSchema)
+    const { register, handleSubmit, formState: { errors } } = useForm<formValue>({
+        resolver: yupResolver(validationSchema),
+        mode: "onBlur", // 'onBlur'
     });
-    const onSubmit = (data: signInForm) => {
+    const onSubmit = (data: formValue) => {
         console.log(data);
     }
 
@@ -29,16 +30,21 @@ const SignIn = () => {
         <div className="loginWrap"
         >
             <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
-                <label>이메일</label>
-                <input {...register("email")} />
-                <p>{errors.email?.message}</p>
-                <label>비밀번호</label>
-                <input {...register("password")} />
-                <p>{errors.password?.message}</p>
-                <br />
-                <button type="submit">
-                    로그인
-                </button>
+                <div>
+                    <label>이메일</label>
+                    <input {...register("email")} />
+                    <p>{errors.email?.message}</p>
+                </div>
+                <div>
+                    <label>비밀번호</label>
+                    <input type="password" {...register("password")} autoComplete="off" />
+                    <p>{errors.password?.message}</p>
+                </div>
+                <div>
+                    <button type="submit">
+                        로그인
+                    </button>
+                </div>
             </form>
         </div>
     )
