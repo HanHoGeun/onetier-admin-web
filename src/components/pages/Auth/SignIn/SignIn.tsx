@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import './SignIn.styles'
+import {LoginWrap} from './SignIn.styles'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux'
+import {increment} from '../../../../store/module/authReducer';
+import type {RootState} from '../../../../store/store';
 
 interface formValue {
     email: String;
@@ -10,6 +13,7 @@ interface formValue {
 }
 
 const SignIn = () => {
+
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .required('아이디는 필수 입력사항입니다.')
@@ -20,14 +24,18 @@ const SignIn = () => {
     })
     const { register, handleSubmit, formState: { errors } } = useForm<formValue>({
         resolver: yupResolver(validationSchema),
-        mode: "onBlur", // 'onBlur'
+        mode: "onChange", // 'onChange'
     });
     const onSubmit = (data: formValue) => {
         console.log(data);
+        dispatch(increment())
     }
+    const count = useSelector((state: RootState) => state.auth.test)
+    const dispatch = useDispatch()
+
 
     return(
-        <div className="loginWrap"
+        <LoginWrap
         >
             <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
                 <div>
@@ -45,8 +53,11 @@ const SignIn = () => {
                         로그인
                     </button>
                 </div>
+                <div>
+                    Test Count ::: {count}
+                </div>
             </form>
-        </div>
+        </LoginWrap>
     )
 }
 
